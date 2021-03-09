@@ -28,7 +28,7 @@ void insertAtHead(node* &head,int val){
     n->next=head;
     head=n;
 }
-void insertAtMiddle(node* &head,int element,int val){
+void insertAtMiddle(node* &head,int element,int val){  // insert elemnent after a particular node
     node* n = new node(val);
     node* temp=head;
     while(temp->data!=element){
@@ -36,6 +36,20 @@ void insertAtMiddle(node* &head,int element,int val){
     }
     n->next = temp->next;
     temp->next=n;
+}
+void insertAtMiddle2(node* &head,int element,int val){  //insert a node before a particular node
+    node* n = new node(val);
+    if(head->data == element){
+       n->next=head;
+       head=n;
+       return;
+    }
+    node* temp = head;
+    while(temp->next->data != element){
+        temp = temp->next;
+    }
+    n->next = temp->next;
+    temp->next = n;
 }
 void display(node* head){
     node* temp = head;
@@ -55,6 +69,10 @@ int main() {
     insertAtHead(head,4);
     display(head);
     insertAtMiddle(head,2,30);
+    display(head);
+    insertAtMiddle2(head,30,80);
+    display(head);
+    insertAtMiddle2(head,4,90);
     display(head);
 	return 0;
 }
