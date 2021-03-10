@@ -51,6 +51,32 @@ void insertAtMiddle2(node* &head,int element,int val){  //insert a node before a
     n->next = temp->next;
     temp->next = n;
 }
+void deleteAtTail(node* &head){
+    node* temp=head;
+    head = head ->next;
+    delete temp;
+}
+void deletion(node* &head,int val){
+    if(head==NULL){
+        cout<<"underflow";
+        return;
+    }
+    node* todelete;
+    if(head->next==NULL){
+        todelete = head;
+        head = NULL;
+        delete todelete;
+        return;
+    }
+    node* temp = head;
+    while(temp->next->data != val){
+        temp = temp->next;
+    }
+    todelete = temp->next;
+    temp->next = temp->next->next;
+    delete todelete;
+    
+}
 void display(node* head){
     node* temp = head;
     while(temp!=NULL){
@@ -74,5 +100,10 @@ int main() {
     display(head);
     insertAtMiddle2(head,4,90);
     display(head);
-	return 0;
+    insertAtTail(head,3);
+    deletion(head,3);
+    display(head);
+    deleteAtTail(head);
+    display(head);
+    return 0;
 }
