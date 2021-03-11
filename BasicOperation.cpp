@@ -60,9 +60,17 @@ node* reverse_iterative(node* &head){
         current->next = previous;
         previous = current;
         current = Next;
-       
     }
     return previous;
+}
+node* reverse_recursion(node* &head){
+    if(head == NULL || head->next == NULL){
+        return head;
+    }
+    node* newhead = reverse_recursion(head->next);
+    head->next->next = head;
+    head -> next = NULL;
+    return newhead;
 }
 void deleteAtTail(node* &head){
     node* temp=head;
@@ -118,5 +126,10 @@ int main() {
     display(head);
     deleteAtTail(head);
     display(head);
+    node* newhead;
+    newhead = reverse_iterative(head);
+    display(newhead);
+    newhead = reverse_recursion(newhead);
+    display(newhead);
     return 0;
 }
