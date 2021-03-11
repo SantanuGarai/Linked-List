@@ -51,6 +51,19 @@ void insertAtMiddle2(node* &head,int element,int val){  //insert a node before a
     n->next = temp->next;
     temp->next = n;
 }
+node* reverse_iterative(node* &head){
+    node* previous = NULL;
+    node* current = head;
+    node* Next;
+    while(current != NULL){
+        Next = current->next;
+        current->next = previous;
+        previous = current;
+        current = Next;
+       
+    }
+    return previous;
+}
 void deleteAtTail(node* &head){
     node* temp=head;
     head = head ->next;
