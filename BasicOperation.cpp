@@ -72,6 +72,45 @@ node* reverse_recursion(node* &head){
     head -> next = NULL;
     return newhead;
 }
+void makecycle(node* &head, int val){
+    node* temp = head;
+    node* ptr;
+    int count = 1;
+    while(temp->next!= NULL){
+        if(val == count){
+            ptr = temp;
+        }
+        count++;
+        temp = temp->next;
+    }
+    temp->next = ptr;
+}
+bool detectCycle(node* &head){
+    node* slow=head;
+    node* fast=head;
+    while(fast && fast->next){
+        slow = slow->next;
+        fast = fast->next->next;
+        if(fast == slow){
+            return true;
+        }
+    }
+    return false;
+}
+void removeCycle(node* &head){
+    node* slow = head;
+    node* fast = head;
+    do{
+      fast=fast->next->next;
+      slow = slow->next;
+    }while(fast != slow);
+    fast = head;
+    while(fast->next != slow->next){
+      fast = fast->next;
+      slow = slow->next;
+   }
+   slow->next=NULL;
+}
 void deleteAtTail(node* &head){
     node* temp=head;
     head = head ->next;
@@ -112,6 +151,10 @@ int main() {
     insertAtTail(head,1);
     insertAtTail(head,2);
     insertAtTail(head,3);
+    makecycle(head,3);
+    cout<<detectCycle(head)<<endl;
+    removeCycle(head);
+    cout<<detectCycle(head)<<endl;
     display(head);
     insertAtHead(head,4);
     display(head);
