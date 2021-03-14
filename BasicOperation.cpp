@@ -72,6 +72,56 @@ node* reverse_recursion(node* &head){
     head -> next = NULL;
     return newhead;
 }
+void makeIntersection(node* &head1,node* &head2,int pos){
+    node* temp1 = head1;
+    node* temp2 =head2;
+    pos--;
+    while(pos){
+        temp1 = temp1->next;
+        pos--;
+    }
+    while(temp2->next!=NULL){
+        temp2 =temp2->next;
+    }
+    temp2->next = temp1;
+    
+}
+int findIntersect(node* &head1,node* &head2){
+    int l1 = length(head1);
+    int l2 = length(head2);
+    node* ptr1;
+    node* ptr2;
+    int d;
+    if(l1-l2>0){
+       d = l1-l2;
+       ptr1 = head1;
+       ptr2 = head2;
+    }
+    else if(l1-l2<0){
+        d=l2-l1;
+        ptr1 = head2;
+        ptr2 = head1;
+    }
+    else{
+        ptr1 = head1;
+        ptr2 = head2;
+    }
+    while(d){
+        if(ptr1 == NULL){
+            return -1;
+        }
+        ptr1 = ptr1->next;
+        d--;
+    }
+    while(ptr1 && ptr2){
+        if(ptr1 == ptr2){
+            return ptr1->data;
+        }
+        ptr1 = ptr1->next;
+        ptr2 = ptr2->next;
+    }
+    return -1;
+}
 void makecycle(node* &head, int val){
     node* temp = head;
     node* ptr;
