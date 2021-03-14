@@ -111,6 +111,35 @@ void removeCycle(node* &head){
    }
    slow->next=NULL;
 }
+int length(node* head){
+    node* temp = head;
+    int count = 0;
+    while(temp!=NULL){
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
+node* kappend(node* &head,int k){  //Append Last K Nodes of a Linked List
+    node* newhead;
+    node* newtail;
+    node* tail = head;
+    int l = length(head);
+    int count = 1;
+    while(tail->next!=NULL){
+        if(count == (l-k+1)){
+            newhead = tail;
+        }
+        if(count == (l-k)){
+            newtail = tail;
+        }
+        count++;
+        tail = tail->next;
+    }
+    tail->next = head;
+    newtail->next = NULL;
+    return newhead;
+}
 void deleteAtTail(node* &head){
     node* temp=head;
     head = head ->next;
