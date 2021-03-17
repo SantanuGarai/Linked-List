@@ -132,6 +132,21 @@ node* mergeRecursive(node* &head1,node* &head2){ //Merge 2 Sorted Linked List re
    }
    return result;
 }
+void evenAfterOdd(node* &head){  //Put Even Position Nodes after Odd Position Nodes
+    node* evenstart = head->next;
+    node* odd = head;
+    node* even = head->next;
+    while(odd->next && even->next){
+        odd->next = odd->next->next;
+        odd = odd->next;
+        even->next = even->next->next;
+        even = even->next;
+    }
+    odd->next = evenstart;
+    if(even ){
+     even->next = NULL;
+    }
+}
 int findIntersect(node* &head1,node* &head2){
     int l1 = length(head1);
     int l2 = length(head2);
